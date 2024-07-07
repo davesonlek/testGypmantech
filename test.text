@@ -1,0 +1,25 @@
+ตอบข้อ1 
+Create
+INSERT INTO `Customer` (`customer_id`, `birthday`, `percent1`, `percent2`)
+VALUES(1, '1905-05-01', 30, 25),(2, '1909-11-20', 50, 10),(3, '1915-01-20', 20, 5);
+Read
+SELECT * FROM `customer`;
+Update
+UPDATE `customer` SET `birthday`='1905-05-01',`percent1`=30,`percent2`=25 WHERE `customer_id` = 1;
+Delete
+DELETE FROM `customer` WHERE `customer_id` = 1;
+
+ตอบข้อ 2
+Create
+INSERT INTO `Sale` (`sale_id`, `ref_customer_id`, `product_id`, `quantity`, `price`)VALUES(1, 1, 'X', 3, 1000),(2, 2, 'Y', 10, 3000),(3, 3, 'Z', 5, 2500);
+Read
+SELECT * FROM `Sale`;
+Update
+UPDATE `Sale` SET `ref_customer_id`=1,`product_id`='X',`quantity`=3, `price`=1000 WHERE `sale_id` = 1;
+Delete
+DELETE FROM `Sale` WHERE `sale_id` = 1;
+ตอบข้อที่2ส่วนที่2
+SELECT s.sale_id, s.ref_customer_id, s.product_id, s.quantity, s.price, (s.quantity * s.price) AS gross, (s.quantity * s.price) * (c.percent1 / 100) AS discount1, ((s.quantity * s.price) - ((s.quantity * s.price) * (c.percent1 / 100))) * (c.percent2 / 100) AS discount2, (s.quantity * s.price) - ((s.quantity * s.price) * (c.percent1 / 100)) - (((s.quantity * s.price) - ((s.quantity * s.price) * (c.percent1 / 100))) * (c.percent2 / 100)) AS net FROM sale s JOIN customer c ON s.ref_customer_id = c.customer_id;
+
+ตอบข้อ 3 
+SELECT `student`,`score`, CASE WHEN `score` < 60 THEN 'E' WHEN `score` BETWEEN 60 AND 69 THEN 'D' WHEN `score` BETWEEN 70 AND 79 THEN 'C' WHEN `score` BETWEEN 80 AND 89 THEN 'B' WHEN `score` >= 90 THEN 'A' END AS `grade` FROM `score`;
